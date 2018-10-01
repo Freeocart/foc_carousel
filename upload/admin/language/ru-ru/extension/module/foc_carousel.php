@@ -1,7 +1,12 @@
 <?php
 $_['heading_title'] = 'FOC: Карусель';
+$_['entry_name'] = 'Название';
+$_['entry_status'] = 'Статус';
 $_['entry_slides_count'] = 'Количество слайдов';
+$_['entry_template_postfix'] = 'Постфикс в названии шаблонов';
 
+$_['button_remove_slide'] = 'Удалить слайд';
+$_['button_add_slide'] = 'Добавить слайд';
 
 $_['foc_add2cart_box_info_tab_name'] = 'Информация';
 $_['foc_add2cart_box_info_tab_title'] = 'О модуле';

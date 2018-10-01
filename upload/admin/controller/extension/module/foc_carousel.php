@@ -141,6 +141,8 @@ class ControllerExtensionModuleFocCarousel extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
     $data['column_left'] = $this->load->controller('common/column_left');
 
+    $data['button_add_slide'] = $this->language->get('button_add_slide');
+    $data['button_remove_slide'] = $this->language->get('button_remove_slide');
 		$data['button_cancel'] = $this->language->get('cancel');
 		$data['button_save'] = $this->language->get('save');
 

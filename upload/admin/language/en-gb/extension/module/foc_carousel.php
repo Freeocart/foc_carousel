@@ -1,6 +1,12 @@
 <?php
 $_['heading_title'] = 'FOC: Carousel';
+$_['entry_name'] = 'Name';
+$_['entry_status'] = 'Status';
+$_['entry_template_postfix'] = 'Template file postfix';
 $_['entry_slides_count'] = 'Slides count per view';
+
+$_['button_remove_slide'] = 'Remove slide';
+$_['button_add_slide'] = 'Add slide';
 
 $_['foc_add2cart_box_info_tab_name'] = 'Information';
 $_['foc_add2cart_box_info_tab_title'] = 'About';

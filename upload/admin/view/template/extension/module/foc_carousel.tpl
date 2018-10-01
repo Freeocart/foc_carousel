@@ -83,7 +83,7 @@
             <div class="tab-pane <?php if ($language['language_id'] == $language_id) : ?>active<?php endif; ?>" id="language<?php echo $language['language_id']; ?>">
 
               <div class="btn-group">
-                <a href="#" class="btn btn-primary b-slides__add" data-language-id="<?php echo $language['language_id']; ?>"><i class="fa fa-plus"></i> Add slide</a>
+                <a href="#" class="btn btn-primary b-slides__add" data-language-id="<?php echo $language['language_id']; ?>"><i class="fa fa-plus"></i> <?php echo $button_add_slide; ?></a>
               </div>
 
               <div class="form-group b-slides__container">
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="col-sm-2">
-                      <a href="" class="btn btn-danger b-slide__delete">remove</a>
+                      <a href="" class="btn btn-danger b-slide__delete"><?php echo $button_remove_slide; ?></a>
                     </div>
 
                     <div class="col-sm-1">
@@ -261,7 +261,7 @@ $(function () {
         html += '</select>'
         html += '</div>'
         html += '<div class="col-sm-2">'
-        html += '<a href="" class="btn btn-danger b-slide__delete">remove</a>'
+        html += '<a href="" class="btn btn-danger b-slide__delete"><?php echo $button_remove_slide; ?></a>'
         html += '</div>'
         html += '<div class="col-sm-1">'
         html += '<input type="hidden" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[' + this.language_id + '][' + this.counter + '][weight]" value="' + this.counter + '">'
