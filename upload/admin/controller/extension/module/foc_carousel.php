@@ -34,13 +34,25 @@ class ControllerExtensionModuleFocCarousel extends Controller {
     $this->load->model('localisation/language');
     $this->load->model('extension/module');
     $this->load->model('tool/image');
+
+    $this->document->addScript('view/javascript/jquery/jquery-ui/jquery-ui.min.js');
+
     if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-      // var_dump($this->request->post);die;
+      $carousel = array();
+      $post = $this->request->post;
+
+      foreach ($post['foc_carousel'] as $language_id => $slides) {
+        foreach ($slides as $slide) {
+          $carousel[$language_id][$slide['weight']] = $slide;
+        }
+      }
+
+      $post['foc_carousel'] = $carousel;
+
 			if (!isset($this->request->get['module_id'])) {
-				$this->model_extension_module->addModule('foc_carousel', $this->request->post);
+				$this->model_extension_module->addModule('foc_carousel', $post);
 			} else {
-        // var_dump($this->request->post);die;
-				$this->model_extension_module->editModule($this->request->get['module_id'], $this->request->post);
+				$this->model_extension_module->editModule($this->request->get['module_id'], $post);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -103,6 +115,8 @@ class ControllerExtensionModuleFocCarousel extends Controller {
       $data['slides'] = $module_info['foc_carousel'];
 
       foreach ($data['slides'] as $language_id => $slides) {
+        ksort($data['slides'][$language_id]);
+
         $data['counter'][$language_id] = max(array_column($slides, 'weight'));
 
         foreach ($slides as $i => $slide) {
@@ -136,6 +150,12 @@ class ControllerExtensionModuleFocCarousel extends Controller {
     $data['entry_status'] = $this->language->get('entry_status');
     $data['entry_slides_count'] = $this->language->get('entry_slides_count');
     $data['entry_template_postfix'] = $this->language->get('entry_template_postfix');
+
+    $data['labels'] = array();
+
+		$data['labels']['foc_add2cart_box_info_tab_name'] = $this->language->get('foc_add2cart_box_info_tab_name');
+		$data['labels']['foc_add2cart_box_info_tab_title'] = $this->language->get('foc_add2cart_box_info_tab_title');
+		$data['labels']['foc_add2cart_box_info_tab_content'] = $this->language->get('foc_add2cart_box_info_tab_content');
 
     $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 

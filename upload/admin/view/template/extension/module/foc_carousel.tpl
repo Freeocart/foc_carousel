@@ -100,12 +100,12 @@
                       </select>
                     </div>
 
-                    <div class="col-sm-1">
-                      <input type="text" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][weight]" value="<?php echo $i; ?>">
-                    </div>
-
                     <div class="col-sm-2">
                       <a href="" class="btn btn-danger b-slide__delete">remove</a>
+                    </div>
+
+                    <div class="col-sm-1">
+                      <input type="hidden" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][weight]" value="<?php echo $i; ?>">
                     </div>
 
                     <div class="b-slide__content col-sm-12">
@@ -136,10 +136,10 @@
             <?php endforeach; ?>
 
             <div id="tab-info" class="tab-pane">
-              <h3><?php //echo $labels['foc_add2cart_box_info_tab_title']; ?></h3>
+              <h3><?php echo $labels['foc_add2cart_box_info_tab_title']; ?></h3>
               <hr>
               <div>
-                <?php //echo $labels['foc_add2cart_box_info_tab_content']; ?>
+                <?php echo $labels['foc_add2cart_box_info_tab_content']; ?>
               </div>
             </div>
           </div>
@@ -158,6 +158,13 @@
   margin: 1em 0;
   padding: 1em 0;
   border-bottom: 1px solid #dfdfdf;
+  background-color: #fff;
+}
+.b-slides__slide:first-child {
+  border-top: 1px solid #dfdfdf;
+}
+.b-slides__slide.ui-sortable-helper {
+  border: 1px solid #dfdfdf;
 }
 .b-slides__slide:before,
 .b-slides__slide:after {
@@ -168,6 +175,21 @@
 </style>
 <script>
 $(function () {
+
+  var recalculatePositions = function (event, ui) {
+    var $el = ui.item;
+    var holder = $el.parents('.b-slides__container');
+    console.log($el, holder)
+    holder.find('.b-slides__slide').each(function (iter, item) {
+      var $item = $(item);
+      $item.find('.b-slide__weight').val($item.index());
+    });
+  }
+
+  $('.b-slides__container').sortable({
+    stop: recalculatePositions
+  });
+
   var FocCarousel = function (settings) {
     this.language_id = settings.language_id;
     this.counter = !!settings.counter ? settings.counter : 0;
@@ -238,11 +260,11 @@ $(function () {
         html += '<option value="html">Custom html</option>'
         html += '</select>'
         html += '</div>'
-        html += '<div class="col-sm-1">'
-        html += '<input type="text" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[' + this.language_id + '][' + this.counter + '][weight]" value="' + this.counter + '">'
-        html += '</div>'
         html += '<div class="col-sm-2">'
         html += '<a href="" class="btn btn-danger b-slide__delete">remove</a>'
+        html += '</div>'
+        html += '<div class="col-sm-1">'
+        html += '<input type="hidden" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[' + this.language_id + '][' + this.counter + '][weight]" value="' + this.counter + '">'
         html += '</div>'
         html += '<div class="b-slide__content col-sm-12"></div>'
         html += '</div>'
