@@ -35,6 +35,7 @@ class ControllerExtensionModuleFocCarousel extends Controller {
     $this->load->model('extension/module');
     $this->load->model('tool/image');
 
+    $this->document->addStyle('view/javascript/jquery/jquery-ui/jquery-ui.min.css');
     $this->document->addScript('view/javascript/jquery/jquery-ui/jquery-ui.min.js');
 
     if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {

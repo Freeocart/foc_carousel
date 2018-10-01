@@ -101,11 +101,15 @@
                     </div>
 
                     <div class="col-sm-2">
-                      <a href="" class="btn btn-danger b-slide__delete"><?php echo $button_remove_slide; ?></a>
+                      <a href="" class="btn btn-danger b-slide__delete"><i class="fa fa-trash"></i> <?php echo $button_remove_slide; ?></a>
                     </div>
 
                     <div class="col-sm-1">
                       <input type="hidden" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][weight]" value="<?php echo $i; ?>">
+                    </div>
+
+                    <div class="b-slides__slide_handle">
+                      <span class="ui-icon ui-icon-arrow-4-diag"></span>
                     </div>
 
                     <div class="b-slide__content col-sm-12">
@@ -155,8 +159,8 @@
 
 <style>
 .b-slides__slide {
-  margin: 1em 0;
-  padding: 1em 0;
+  position: relative;
+  padding: 1em;
   border-bottom: 1px solid #dfdfdf;
   background-color: #fff;
 }
@@ -172,6 +176,19 @@
   display: table;
   clear: both;
 }
+.b-slides__slide_handle {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #dfdfdf;
+}
+.b-slides__slide_handle .ui-icon {
+  display: inline-block;
+  margin: 12px;
+}
 </style>
 <script>
 $(function () {
@@ -179,7 +196,6 @@ $(function () {
   var recalculatePositions = function (event, ui) {
     var $el = ui.item;
     var holder = $el.parents('.b-slides__container');
-    console.log($el, holder)
     holder.find('.b-slides__slide').each(function (iter, item) {
       var $item = $(item);
       $item.find('.b-slide__weight').val($item.index());
@@ -187,7 +203,9 @@ $(function () {
   }
 
   $('.b-slides__container').sortable({
-    stop: recalculatePositions
+    items: '.b-slides__slide',
+    stop: recalculatePositions,
+    handle: '.b-slides__slide_handle'
   });
 
   var FocCarousel = function (settings) {
@@ -261,11 +279,12 @@ $(function () {
         html += '</select>'
         html += '</div>'
         html += '<div class="col-sm-2">'
-        html += '<a href="" class="btn btn-danger b-slide__delete"><?php echo $button_remove_slide; ?></a>'
+        html += '<a href="" class="btn btn-danger b-slide__delete"><i class="fa fa-trash"></i> <?php echo $button_remove_slide; ?></a>'
         html += '</div>'
         html += '<div class="col-sm-1">'
         html += '<input type="hidden" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[' + this.language_id + '][' + this.counter + '][weight]" value="' + this.counter + '">'
         html += '</div>'
+        html += '<div class="b-slides__slide_handle"></div>'
         html += '<div class="b-slide__content col-sm-12"></div>'
         html += '</div>'
 
