@@ -1,4 +1,4 @@
-<div id="carousel<?php echo $module; ?>" class="owl-carousel">
+<div id="foc_carousel<?php echo $module; ?>" class="owl-carousel">
   <?php foreach ($slides as $slide) { ?>
   <div class="item text-center">
     <?php if (isset($slide['type'])) : ?>
@@ -15,7 +15,7 @@
 </div>
 
 <script type="text/javascript"><!--
-$('#carousel<?php echo $module; ?>').owlCarousel({
+$('#foc_carousel<?php echo $module; ?>').owlCarousel({
 	items: <?php echo $slides_count; ?>,
 	autoPlay: 3000,
 	navigation: true,

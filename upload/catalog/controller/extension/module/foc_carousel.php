@@ -32,12 +32,19 @@ class ControllerExtensionModuleFocCarousel extends Controller {
           $thumb = 'no_image.png';
         }
 
-        $data['slides'][$i]['thumb'] = $this->model_tool_image->resize($thumb, 100, 100);
+        $data['slides'][$i]['thumb'] = $this->model_tool_image->resize($thumb, 500, 350);
       }
     }
 
     $route = 'extension/module/foc_carousel';
-    $theme = $this->config->get('config_template');
+    $theme = $this->config->get('config_theme');
+    if ($theme == 'theme_default') {
+      $theme = $this->config->get('theme_default_directory');
+    }
+    else {
+      $theme = $this->config->get('config_theme');
+    }
+
     $theme_tpl = DIR_TEMPLATE . $theme . '/template/' . $route . '_' . $module_info['template_postfix'] . '.tpl';
     $default_tpl = DIR_TEMPLATE . 'default/template/' . $route . '_' . $module_info['template_postfix'] . '.tpl';
 

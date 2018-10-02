@@ -4,6 +4,7 @@ $_['entry_name'] = 'Name';
 $_['entry_status'] = 'Status';
 $_['entry_template_postfix'] = 'Template file postfix';
 $_['entry_slides_count'] = 'Slides count per view';
+$_['entry_carousel_image_link'] = 'Image link';
 
 $_['button_remove_slide'] = 'Remove slide';
 $_['button_add_slide'] = 'Add slide';
