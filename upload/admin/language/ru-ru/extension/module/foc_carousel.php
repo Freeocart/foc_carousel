@@ -6,6 +6,9 @@ $_['entry_slides_count'] = 'Количество слайдов';
 $_['entry_template_postfix'] = 'Постфикс в названии шаблонов';
 $_['entry_carousel_image_link'] = 'Ссылка';
 
+$_['entry_carousel_youtube_width'] = 'Длина Youtube';
+$_['entry_carousel_youtube_height'] = 'Высота Youtube';
+
 $_['button_remove_slide'] = 'Удалить слайд';
 $_['button_add_slide'] = 'Добавить слайд';
 

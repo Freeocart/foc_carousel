@@ -154,6 +154,8 @@ class ControllerExtensionModuleFocCarousel extends Controller {
     $data['entry_slides_count'] = $this->language->get('entry_slides_count');
     $data['entry_template_postfix'] = $this->language->get('entry_template_postfix');
     $data['entry_carousel_image_link'] = $this->language->get('entry_carousel_image_link');
+    $data['entry_carousel_youtube_width'] = $this->language->get('entry_carousel_youtube_width');
+    $data['entry_carousel_youtube_height'] = $this->language->get('entry_carousel_youtube_height');
 
     $data['labels'] = array();
 

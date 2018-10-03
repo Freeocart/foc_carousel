@@ -6,6 +6,9 @@ $_['entry_template_postfix'] = 'Template file postfix';
 $_['entry_slides_count'] = 'Slides count per view';
 $_['entry_carousel_image_link'] = 'Image link';
 
+$_['entry_carousel_youtube_width'] = 'Youtube width';
+$_['entry_carousel_youtube_height'] = 'Youtube height';
+
 $_['button_remove_slide'] = 'Remove slide';
 $_['button_add_slide'] = 'Add slide';
 

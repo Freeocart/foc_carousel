@@ -89,7 +89,8 @@
               <div class="form-group b-slides__container">
 
                 <?php if (isset($slides[$language['language_id']]) && count($slides[$language['language_id']]) > 0) : ?>
-                  <?php foreach ($slides[$language['language_id']] as $i => $slide) : ?>
+                  <?php $lang_id = $language['language_id']; ?>
+                  <?php foreach ($slides[$lang_id] as $i => $slide) : ?>
                   <div class="b-slides__slide">
                     <div class="col-sm-2">
                       <select class="form-control b-slide__type_select">
@@ -105,7 +106,7 @@
                     </div>
 
                     <div class="col-sm-1">
-                      <input type="hidden" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][weight]" value="<?php echo $i; ?>">
+                      <input type="hidden" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][weight]" value="<?php echo $i; ?>">
                     </div>
 
                     <div class="b-slides__slide_handle">
@@ -115,20 +116,25 @@
                     <div class="b-slide__content col-sm-12">
                     <?php if (isset($slide['type'])) : ?>
                       <?php if ($slide['type'] == 'html') : ?>
-                        <input type="hidden" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][type]" value="html">
-                        <textarea name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][content]" rows="3" class="form-control summernote"><?php echo $slide['content']; ?></textarea>
+                        <input type="hidden" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][type]" value="html">
+                        <textarea name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][content]" rows="3" class="form-control summernote"><?php echo $slide['content']; ?></textarea>
                       <?php elseif ($slide['type'] == 'image') : ?>
-                        <input type="hidden" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][type]" value="image">
+                        <input type="hidden" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][type]" value="image">
                         <div>
-                          <a href="#" id="thumb-image-<?php echo $language['language_id']; ?>-<?php echo $i; ?>" data-toggle="image" class="img-thumbnail">
+                          <a href="#" id="thumb-image-<?php echo $lang_id; ?>-<?php echo $i; ?>" data-toggle="image" class="img-thumbnail">
                             <img src="<?php echo $slide['thumb']; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" />
                           </a>
-                          <input type="text" class="form-control" placeholder="<?php echo $entry_carousel_image_link; ?>" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][link]" value="<?php echo $slide['link']; ?>" />
-                          <input type="hidden" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][content]" value="<?php echo $slide['content']; ?>" id="input-image-<?php echo $language['language_id']; ?>-<?php echo $i; ?>" />
+                          <input type="text" class="form-control" placeholder="<?php echo $entry_carousel_image_link; ?>" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][link]" value="<?php echo $slide['link']; ?>" />
+                          <input type="hidden" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][content]" value="<?php echo $slide['content']; ?>" id="input-image-<?php echo $lang_id; ?>-<?php echo $i; ?>" />
                         </div>
                       <?php elseif ($slide['type'] == 'youtube') : ?>
-                        <input type="hidden" name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][type]" value="youtube">
-                        <input name="foc_carousel[<?php echo $language['language_id']; ?>][<?php echo $i; ?>][content]" class="form-control" value="<?php echo $slide['content']; ?>"/>
+                        <input type="hidden" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][type]" value="youtube">
+                        <input name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][content]" class="form-control" value="<?php echo $slide['content']; ?>"/>
+
+                        <div class="form-inline">
+                          <input type="text" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][width]" class="form-control" value="<?php echo isset($slide['width']) ? $slide['width'] : ''; ?>" placeholder="<?php echo $entry_carousel_youtube_width; ?>">
+                          <input type="text" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][height]" class="form-control" value="<?php echo isset($slide['height']) ? $slide['height'] : ''; ?>" placeholder="<?php echo $entry_carousel_youtube_height; ?>">
+                        </div>
                       <?php endif; ?>
                     <?php endif; ?>
                     </div>
@@ -306,6 +312,10 @@ $(function () {
     youtube: function (context, counter) {
       var html = '<input type="hidden" name="foc_carousel[' + this.language_id + '][' + counter + '][type]" value="youtube">';
           html += '<input name="foc_carousel['+ this.language_id + '][' + counter + '][content]" class="form-control"/>';
+          html += '<div class="form-inline">';
+          html += '<input type="text" name="foc_carousel[' + this.language_id + '][' + counter + '][width]" class="form-control" value="" placeholder="<?php echo $entry_carousel_youtube_width; ?>">';
+          html += '<input type="text" name="foc_carousel[' + this.language_id + '][' + counter + '][height]" class="form-control" value="" placeholder="<?php echo $entry_carousel_youtube_height; ?>">';
+          html += '</div>';
 
       context.append(html);
     },
