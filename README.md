@@ -9,4 +9,4 @@ With this module, you can easily create unlimited carousel blocks for your Openc
 3. Customize frontend templates for each carousel you want with template postfix feature
 4. D&D support - easily reorder your slides with mouse
 
-[FOC:Carousel settings](./preview.png)
+![FOC:Carousel settings](./preview.png)
