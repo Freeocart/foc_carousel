@@ -139,9 +139,9 @@
                         <div>
                           <a href="#" id="thumb-image-<?php echo $lang_id; ?>-<?php echo $i; ?>" data-toggle="image" class="img-thumbnail">
                             <img src="<?php echo $slide['thumb']; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" />
+                            <input type="hidden" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][content]" value="<?php echo $slide['content']; ?>" id="input-image-<?php echo $lang_id; ?>-<?php echo $i; ?>" />
                           </a>
                           <input type="text" class="form-control" placeholder="<?php echo $entry_carousel_image_link; ?>" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][link]" value="<?php echo $slide['link']; ?>" />
-                          <input type="hidden" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][content]" value="<?php echo $slide['content']; ?>" id="input-image-<?php echo $lang_id; ?>-<?php echo $i; ?>" />
                         </div>
                       <?php elseif ($slide['type'] == 'youtube') : ?>
                         <input type="hidden" name="foc_carousel[<?php echo $lang_id; ?>][<?php echo $i; ?>][type]" value="youtube">
@@ -340,8 +340,8 @@ $(function () {
           html += '<div>';
           html += '<a href="#" id="thumb-image-' + this.language_id + '-' + counter + '" data-toggle="image" class="img-thumbnail">';
           html += '<img src="' + this.imgPlaceholder + '" alt="" title="" data-placeholder="' + this.imgPlaceholder + '" />';
-          html += '</a>';
           html += '<input type="hidden" name="foc_carousel['+ this.language_id + '][' + counter + '][content]" value="" id="input-image-' + this.language_id + '-' + counter + '" />';
+          html += '</a>';
           html += '<input type="text" class="form-control" placeholder="url" name="foc_carousel[' + this.language_id + '][' + counter + '][link]" value="" />'
           html += '</div>';
 
