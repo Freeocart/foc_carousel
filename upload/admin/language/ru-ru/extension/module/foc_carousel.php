@@ -9,6 +9,9 @@ $_['entry_carousel_image_link'] = 'Ссылка';
 $_['entry_carousel_youtube_width'] = 'Длина Youtube';
 $_['entry_carousel_youtube_height'] = 'Высота Youtube';
 
+$_['entry_crop_horizontal'] = 'Обрезка изображения по горизонтали';
+$_['entry_crop_vertical'] = 'Обрезка изображения по вертикали';
+
 $_['button_remove_slide'] = 'Удалить слайд';
 $_['button_add_slide'] = 'Добавить слайд';
 

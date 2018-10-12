@@ -108,8 +108,19 @@ class ControllerExtensionModuleFocCarousel extends Controller {
 
     $data['slides'] = array();
     $data['counter'] = array();
+    $data['settings'] = array();
+
     foreach ($data['languages'] as $language) {
       $data['counter'][$language['language_id']] = 0;
+      if (isset($module_info['foc_carousel_settings'][$language['language_id']])) {
+        $data['settings'][$language['language_id']] = $module_info['foc_carousel_settings'][$language['language_id']];
+      }
+      else {
+        $data['settings'][$language['language_id']] = array(
+          'crop_horizontal' => '',
+          'crop_vertical' => ''
+        );
+      }
     }
 
     if (isset($module_info['foc_carousel'])) {
@@ -121,7 +132,7 @@ class ControllerExtensionModuleFocCarousel extends Controller {
         $data['counter'][$language_id] = max(array_column($slides, 'weight'));
 
         foreach ($slides as $i => $slide) {
-          if ($slide['type'] == 'image') {
+          if (isset($slide['type']) && $slide['type'] == 'image') {
             if (is_file(DIR_IMAGE . $slide['content'])) {
               $image = $slide['content'];
               $thumb = $slide['content'];
@@ -135,6 +146,8 @@ class ControllerExtensionModuleFocCarousel extends Controller {
         }
       }
     }
+
+
 
 		$data['heading_title'] = $this->language->get('heading_title');
 		$data['breadcrumbs'] = $this->breadcrumbs();
@@ -156,6 +169,9 @@ class ControllerExtensionModuleFocCarousel extends Controller {
     $data['entry_carousel_image_link'] = $this->language->get('entry_carousel_image_link');
     $data['entry_carousel_youtube_width'] = $this->language->get('entry_carousel_youtube_width');
     $data['entry_carousel_youtube_height'] = $this->language->get('entry_carousel_youtube_height');
+
+    $data['entry_crop_horizontal'] = $this->language->get('entry_crop_horizontal');
+    $data['entry_crop_vertical'] = $this->language->get('entry_crop_vertical');
 
     $data['labels'] = array();
 

@@ -80,7 +80,24 @@
 
           <div class="tab-content">
             <?php foreach ($languages as $language) : ?>
-            <div class="tab-pane <?php if ($language['language_id'] == $language_id) : ?>active<?php endif; ?>" id="language<?php echo $language['language_id']; ?>">
+            <?php $lang_id = $language['language_id']; ?>
+            <div class="tab-pane <?php if ($lang_id == $language_id) : ?>active<?php endif; ?>" id="language<?php echo $lang_id; ?>">
+
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for=""><?php echo $entry_crop_horizontal; ?></label>
+                </div>
+                <div class="col-sm-2">
+                  <input name="foc_carousel_settings[<?php echo $lang_id; ?>][crop_horizontal]" type="text" class="form-control" value="<?php echo $settings[$lang_id]['crop_horizontal']; ?>">
+                </div>
+
+                <div class="col-sm-2">
+                  <label for=""><?php echo $entry_crop_vertical; ?></label>
+                </div>
+                <div class="col-sm-2">
+                  <input name="foc_carousel_settings[<?php echo $lang_id; ?>][crop_vertical]" type="text" class="form-control" value="<?php echo $settings[$lang_id]['crop_vertical']; ?>">
+                </div>
+              </div>
 
               <div class="btn-group">
                 <a href="#" class="btn btn-primary b-slides__add" data-language-id="<?php echo $language['language_id']; ?>"><i class="fa fa-plus"></i> <?php echo $button_add_slide; ?></a>
@@ -88,8 +105,7 @@
 
               <div class="form-group b-slides__container">
 
-                <?php if (isset($slides[$language['language_id']]) && count($slides[$language['language_id']]) > 0) : ?>
-                  <?php $lang_id = $language['language_id']; ?>
+                <?php if (isset($slides[$lang_id]) && count($slides[$lang_id]) > 0) : ?>
                   <?php foreach ($slides[$lang_id] as $i => $slide) : ?>
                   <div class="b-slides__slide">
                     <div class="col-sm-2">

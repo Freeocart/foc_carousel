@@ -17,6 +17,14 @@ class ControllerExtensionModuleFocCarousel extends Controller {
 
     $language_id = $this->config->get('config_language_id');
     $data['slides'] = array();
+    $data['settings'] = array(
+      'crop_horizontal' => 0,
+      'crop_vertical' => 0
+    );
+
+    if (isset($module_info['foc_carousel_settings'][$language_id])) {
+      $data['settings'] = array_replace($data['settings'], $module_info['foc_carousel_settings'][$language_id]);
+    }
 
     if (isset($module_info['foc_carousel'][$language_id])) {
       $data['slides'] = $module_info['foc_carousel'][$language_id];
@@ -32,7 +40,14 @@ class ControllerExtensionModuleFocCarousel extends Controller {
           $thumb = 'no_image.png';
         }
 
-        $data['slides'][$i]['thumb'] = $this->model_tool_image->resize($thumb, 500, 350);
+        $crop_horizontal = $this->config->get($this->config->get('config_theme') . '_image_thumb_width');
+        $crop_vertical = $this->config->get($this->config->get('config_theme') . '_image_thumb_height');
+
+        if ($data['settings']['crop_horizontal'] && $data['settings']['crop_vertical']) {
+          $crop_horizontal = $data['settings']['crop_horizontal'];
+          $crop_vertical = $data['settings']['crop_vertical'];
+        }
+        $data['slides'][$i]['thumb'] = $this->model_tool_image->resize($thumb, $crop_horizontal, $crop_vertical);
       }
     }
 

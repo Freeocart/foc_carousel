@@ -9,6 +9,9 @@ $_['entry_carousel_image_link'] = 'Image link';
 $_['entry_carousel_youtube_width'] = 'Youtube width';
 $_['entry_carousel_youtube_height'] = 'Youtube height';
 
+$_['entry_crop_horizontal'] = 'Image horizontal crop';
+$_['entry_crop_vertical'] = 'Image vertical crop';
+
 $_['button_remove_slide'] = 'Remove slide';
 $_['button_add_slide'] = 'Add slide';
 
