@@ -307,7 +307,7 @@ $(function () {
         html += '<div class="col-sm-1">'
         html += '<input type="hidden" class="form-control b-slide__weight" placeholder="Weight" name="foc_carousel[' + this.language_id + '][' + this.counter + '][weight]" value="' + this.counter + '">'
         html += '</div>'
-        html += '<div class="b-slides__slide_handle"></div>'
+        html += '<div class="b-slides__slide_handle"><span class="ui-icon ui-icon-arrow-4-diag"></span></div>'
         html += '<div class="b-slide__content col-sm-12"></div>'
         html += '</div>'
 
