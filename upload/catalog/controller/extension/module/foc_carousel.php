@@ -23,8 +23,8 @@ class ControllerExtensionModuleFocCarousel extends Controller {
     $language_id = $this->config->get('config_language_id');
     $data['slides'] = array();
     $data['settings'] = array(
-      'crop_horizontal' => 0,
-      'crop_vertical' => 0
+      'crop_horizontal' => 100,
+      'crop_vertical' => 100
     );
 
     if (isset($module_info['foc_carousel_settings'][$language_id])) {
@@ -51,6 +51,10 @@ class ControllerExtensionModuleFocCarousel extends Controller {
         if ($data['settings']['crop_horizontal'] && $data['settings']['crop_vertical']) {
           $crop_horizontal = $data['settings']['crop_horizontal'];
           $crop_vertical = $data['settings']['crop_vertical'];
+        }
+        else {
+          $crop_horizontal = 100;
+          $crop_vertical = 100;
         }
 
         $data['slides'][$i]['thumb'] = $this->model_tool_image->resize($thumb, $crop_horizontal, $crop_vertical);
