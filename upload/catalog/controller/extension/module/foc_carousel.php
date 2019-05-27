@@ -52,13 +52,15 @@ class ControllerExtensionModuleFocCarousel extends Controller {
           $crop_horizontal = $data['settings']['crop_horizontal'];
           $crop_vertical = $data['settings']['crop_vertical'];
         }
+
         $data['slides'][$i]['thumb'] = $this->model_tool_image->resize($thumb, $crop_horizontal, $crop_vertical);
+        $data['slides'][$i]['full'] = $this->model_tool_image->resize($thumb, $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_height'));
       }
     }
 
     $route = 'extension/module/foc_carousel';
     $theme = $this->config->get('config_theme');
-    if ($theme == 'theme_default') {
+    if ($theme == 'theme_default' || $theme == 'default') {
       $theme = $this->config->get('theme_default_directory');
     }
     else {
