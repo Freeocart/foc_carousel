@@ -2,6 +2,11 @@
 
 class ControllerExtensionModuleFocCarousel extends Controller {
 
+  protected function isOpencart3 () {
+    $version_chars = explode('.', VERSION);
+    return (int)$version_chars[0] === 3;
+  }
+
   public function index ($module_info) {
     static $module = 0;
 
@@ -60,8 +65,17 @@ class ControllerExtensionModuleFocCarousel extends Controller {
       $theme = $this->config->get('config_theme');
     }
 
-    $theme_tpl = DIR_TEMPLATE . $theme . '/template/' . $route . '_' . $module_info['template_postfix'] . '.tpl';
-    $default_tpl = DIR_TEMPLATE . 'default/template/' . $route . '_' . $module_info['template_postfix'] . '.tpl';
+    $theme_tpl = DIR_TEMPLATE . $theme . '/template/' . $route . '_' . $module_info['template_postfix'];
+    $default_tpl = DIR_TEMPLATE . 'default/template/' . $route . '_' . $module_info['template_postfix'];
+
+    if ($this->isOpencart3()) {
+      $theme_tpl .= '.twig';
+      $default_tpl .= '.twig';
+    }
+    else {
+      $theme_tpl .= '.tpl';
+      $default_tpl .= '.tpl';
+    }
 
     if ($module_info['template_postfix']) {
       if (($theme && is_file($theme_tpl)) || is_file($default_tpl)) {

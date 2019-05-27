@@ -1,0 +1,23 @@
+<div id="foc_carousel{{ module }}" class="owl-carousel">
+  {% for slide in slides %}
+  <div class="item text-center">
+    {% if (slide['type'] == 'image') %}
+      <img src="{{ slide['thumb'] }}" alt="">
+    {% elseif (slide['type'] == 'youtube') %}
+      <iframe src="{{ slide['content'] }}" frameborder="0"></iframe>
+    {% elseif (slide['type'] == 'html') %}
+      {{ slide['content'] }}
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+<script type="text/javascript"><!--
+$('#foc_carousel{{ module }}').owlCarousel({
+	items: {{ slides_count }},
+	autoPlay: 3000,
+	navigation: true,
+	navigationText: ['<i class="fa fa-chevron-left fa-5x"></i>', '<i class="fa fa-chevron-right fa-5x"></i>'],
+	pagination: true
+});
+--></script>

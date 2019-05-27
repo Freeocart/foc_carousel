@@ -32,7 +32,16 @@ class ControllerExtensionModuleFocCarousel extends Controller {
   public function index () {
     $this->load->language('extension/module/foc_carousel');
     $this->load->model('localisation/language');
-    $this->load->model('extension/module');
+
+    if ($this->isOpencart3()) {
+      $this->load->model('setting/module');
+      $moduleModel = $this->model_setting_module;
+    }
+    else {
+      $this->load->model('extension/module');
+      $moduleModel = $this->model_extension_module;
+    }
+
     $this->load->model('tool/image');
 
     $this->document->addStyle('view/javascript/jquery/jquery-ui/jquery-ui.min.css');
@@ -51,24 +60,29 @@ class ControllerExtensionModuleFocCarousel extends Controller {
       $post['foc_carousel'] = $carousel;
 
 			if (!isset($this->request->get['module_id'])) {
-				$this->model_extension_module->addModule('foc_carousel', $post);
+				$moduleModel->addModule('foc_carousel', $post);
 			} else {
-				$this->model_extension_module->editModule($this->request->get['module_id'], $post);
+				$moduleModel->editModule($this->request->get['module_id'], $post);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=module', true));
+      if ($this->isOpencart3()) {
+        $this->response->redirect($this->url->link('marketplace/extension', $this->getTokenParam() . '&type=module', true));
+      }
+      else {
+        $this->response->redirect($this->url->link('extension/extension', $this->getTokenParam() . '&type=module', true));
+      }
 		}
 
 		if (!isset($this->request->get['module_id'])) {
-			$data['action'] = $this->url->link('extension/module/carousel', 'token=' . $this->session->data['token'], true);
+			$data['action'] = $this->url->link('extension/module/foc_carousel', $this->getTokenParam(), true);
 		} else {
-			$data['action'] = $this->url->link('extension/module/carousel', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], true);
+			$data['action'] = $this->url->link('extension/module/foc_carousel', $this->getTokenParam() . '&module_id=' . $this->request->get['module_id'], true);
     }
 
     if (isset($this->request->get['module_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$module_info = $this->model_extension_module->getModule($this->request->get['module_id']);
+			$module_info = $moduleModel->getModule($this->request->get['module_id']);
     }
 
 		if (isset($this->request->post['name'])) {
@@ -147,8 +161,6 @@ class ControllerExtensionModuleFocCarousel extends Controller {
       }
     }
 
-
-
 		$data['heading_title'] = $this->language->get('heading_title');
 		$data['breadcrumbs'] = $this->breadcrumbs();
 		$data['header'] = $this->load->controller('common/header');
@@ -198,7 +210,7 @@ class ControllerExtensionModuleFocCarousel extends Controller {
     );
     $breadcrumbs[] = array(
       'text'      => $this->language->get('text_extension'),
-      'href'      => $this->createUrl('extension/extension'),
+      'href'      => $this->isOpencart3() ? $this->createUrl('marketplace/extension') : $this->createUrl('extension/extension'),
       'separator' => ' :: '
     );
 		$breadcrumbs[] = array(

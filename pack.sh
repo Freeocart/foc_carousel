@@ -1,6 +1,12 @@
 #!/bin/bash
-out=foc_carousel.ocmod.zip
+out=foc_carousel_oc3.ocmod.zip
+out2=foc_carousel_oc2.ocmod.zip
 if [[ -f "$out" ]]; then
   rm $out
 fi
-zip -r9 --exclude=*.git* --exclude=*.DS_Store* $out ./upload ./install.xml
+if [[ -f "$out2" ]]; then
+  rm $out2
+fi
+
+zip -r9 --exclude=*.git* --exclude=*.DS_Store* --exclude=*.tpl $out ./upload ./install.xml
+zip -r9 --exclude=*.git* --exclude=*.DS_Store* --exclude=*.twig $out2 ./upload ./install.xml
